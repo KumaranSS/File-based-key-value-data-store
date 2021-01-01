@@ -95,6 +95,29 @@ def read():
 		print("Please enter values to read")
 
 
+def delete():
+	if my_file.exists():	
+		ff=open(path,"r")
+		data = json.load(ff)
+		key=input("\nEnter id to delete: ")
+		if key in data:
+			t=open(time_path,"r")
+			td=json.load(t)
+			curr_time=time.time()		
+			if curr_time-td[key][0] > td[key][1]:	
+				print("Exceeded TimeToLive")
+				return
+			data.pop(key)
+			json_object = json.dumps(data)
+			with open(path, "w") as outfile:
+				outfile.write(json_object)
+		else:
+			print("Does not exist")
+		ff.close()
+	else:
+		print("Please enter values to delete")
+
+
 def update():
 	if my_file.exists():	#check if file exists
 		f=open(path,"r")	
@@ -129,27 +152,6 @@ def update():
 
 
 
-def delete():
-	if my_file.exists():	
-		ff=open(path,"r")
-		data = json.load(ff)
-		key=input("\nEnter id to delete: ")
-		if key in data:
-			t=open(time_path,"r")
-			td=json.load(t)
-			curr_time=time.time()		
-			if curr_time-td[key][0] > td[key][1]:	
-				print("Exceeded TimeToLive")
-				return
-			data.pop(key)
-			json_object = json.dumps(data)
-			with open(path, "w") as outfile:
-				outfile.write(json_object)
-		else:
-			print("Does not exist")
-		ff.close()
-	else:
-		print("Please enter values to delete")
 
 
 import json,sys,time
