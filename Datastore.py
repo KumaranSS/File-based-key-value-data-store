@@ -136,9 +136,7 @@ def update():
 			temp={}	
 			for i in range(1,n+1):																
 				s=input("Enter key"+ str(i) +" and value: ").split(' ')
-                                
-				temp[s[0]]=s[1]
-			
+				temp[s[0]]=s[1]			
 			data[key]=temp 			#update the key value
 			json_object = json.dumps(data)		#converting into JSON object
 			if sys.getsizeof(json_object)>16000:
